@@ -3,6 +3,8 @@
 A full-stack project building a 1-day tech conference website with backend API (Flask) and Frontend via React. 
 This avoids node dependencies by leveraging CDN versions of React for maximum compatibility.
 
+![Project Preview](preview.webp)
+
 ## Tech Stack
 - **Backend:** Python + Flask
 - **Frontend:** React (via unpkg CDN), Babel, HTML, Vanilla CSS with Glassmorphic details.
