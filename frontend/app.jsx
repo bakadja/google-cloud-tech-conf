@@ -6,8 +6,8 @@ const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        // Fetch schedule from backend API
-        fetch('http://127.0.0.1:5000/api/schedule')
+        // Fetch schedule from production backend API
+        fetch('https://gcp-conf-backend-bakadja-v2.onrender.com/api/schedule')
             .then(res => res.json())
             .then(json => {
                 setData(json);
