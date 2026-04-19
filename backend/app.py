@@ -3,7 +3,8 @@ from flask_cors import CORS
 from datetime import datetime
 
 app = Flask(__name__)
-CORS(app)
+# Restrict CORS to specific production origin
+CORS(app, resources={r"/api/*": {"origins": ["https://gcp-tech-conf-bakadja-v1.netlify.app"]}})
 
 # Dummy Data for Google Cloud Technologies Conference
 schedule_data = {
@@ -112,9 +113,18 @@ schedule_data = {
     ]
 }
 
+@app.after_request
+def add_security_headers(response):
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'DENY'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    return response
+
 @app.route('/api/schedule', methods=['GET'])
 def get_schedule():
     return jsonify(schedule_data)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    # Debug mode disabled for production
+    app.run(debug=False, port=5000)
